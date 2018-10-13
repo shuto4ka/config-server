@@ -1,0 +1,10 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/shuto4ka/k8s-deployment/configs
+          search-paths: link-aggregator
