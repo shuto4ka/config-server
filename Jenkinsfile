@@ -75,6 +75,13 @@ pipeline {
             }
         }
 
+        stage('Create ConfigMaps') {
+            steps {
+                sh "kubectl create configmap config-server-cfg --from-file=config/cloud/application.yml"
+            }
+        }
+
+
         stage('Downstream builds') {
             steps {
                 build 'dev-config-server-deploy'
