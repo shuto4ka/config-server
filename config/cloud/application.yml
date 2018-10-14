@@ -6,5 +6,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/shuto4ka/k8s-deployment/configs
-          search-paths: link-aggregator
+          uri: https://github.com/shuto4ka/k8s-deployment
+          search-paths: configs/link-aggregator
