@@ -7,7 +7,7 @@ pipeline {
                 docker {
                     image 'kozhenkov/gradle-agent:gradle-4.10.2-jdk-11'
                     reuseNode true
-                    args '-u 1000:122 -v /var/run/docker.sock:/var/run/docker.sock:rw -v /usr/bin/docker:/usr/bin/docker:ro'
+                    args '-u 1000:1000 -v /var/run/docker.sock:/var/run/docker.sock:rw -v /usr/bin/docker:/usr/bin/docker:ro'
                 }
             }
             steps {
@@ -27,7 +27,7 @@ pipeline {
                 docker {
                     image 'kozhenkov/gradle-agent:gradle-4.10.2-jdk-11'
                     reuseNode true
-                    args '-u 1000:122 -v /var/run/docker.sock:/var/run/docker.sock:rw -v /usr/bin/docker:/usr/bin/docker:ro'
+                    args '-u 1000:1000 -v /var/run/docker.sock:/var/run/docker.sock:rw -v /usr/bin/docker:/usr/bin/docker:ro'
                 }
             }
             steps {
