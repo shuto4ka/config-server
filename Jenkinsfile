@@ -48,15 +48,19 @@ pipeline {
                 fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: 'build/libs/*.jar', targetLocation: 'docker')])
                 echo 'Building docker image'
                 dir('docker') {
-                    script {
-                        def registryPath = "kozhenkov/config-server"
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub',
+                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        script {
+                            def registryPath = "kozhenkov/config-server"
 
-                        sh "docker build --build-arg app_vers=${env.PROJECT_VERSION} -t ${registryPath}:${BUILD_NUMBER} . "
-                        sh "docker push ${registryPath}:${BUILD_NUMBER}"
+                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
 
-                        echo 'Creating and pushing latest tag...'
-                        sh "docker tag ${registryPath}:${BUILD_NUMBER} ${registryPath}:latest"
-                        sh "docker push ${registryPath}:latest"
+                            sh "docker build --build-arg app_vers=${env.PROJECT_VERSION} -t ${registryPath}:${BUILD_NUMBER} . "
+                            sh "docker push ${registryPath}:${BUILD_NUMBER}"
+
+                            echo 'Creating and pushing latest tag...'
+                            sh "docker tag ${registryPath}:${BUILD_NUMBER} ${registryPath}:latest"
+                            sh "docker push ${registryPath}:latest"
 
 //                        if (env.IS_TAG_NEW == 'true') {
 //                            echo "Creating and pushing ${env.PROJECT_VERSION} tag..."
@@ -65,6 +69,7 @@ pipeline {
 //                        } else {
 //                            echo "Creating and pushing versioned tag skipped"
 //                        }
+                        }
                     }
                 }
             }
