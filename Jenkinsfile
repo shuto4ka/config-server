@@ -77,7 +77,8 @@ pipeline {
 
         stage('Create ConfigMaps') {
             steps {
-                sh "kubectl create configmap config-server-cm --from-file=config/cloud/application.yml"
+                sh "kubectl create configmap config-server-cm --from-file=config/cloud/application.yml --namespace=dev"
+//                sh "kubectl create configmap config-server-cm --from-file=config/cloud/application.yml --namespace=prod"
             }
         }
 
