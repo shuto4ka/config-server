@@ -46,6 +46,7 @@ pipeline {
             steps {
                 echo 'Copying artifact to docker location'
                 fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: 'build/libs/*.jar', targetLocation: 'docker')])
+                fileOperations([fileCopyOperation(excludes: '', flattenFiles: true, includes: 'config/cloud/application.yml', targetLocation: 'docker')])
                 echo 'Building docker image'
                 dir('docker') {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub',
@@ -74,14 +75,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Create ConfigMaps') {
-            steps {
-                sh "kubectl create configmap config-server-cm --from-file=config/cloud/application.yml --namespace=dev -o yaml --dry-run | kubectl apply -f -"
-//                sh "kubectl create configmap config-server-cm --from-file=config/cloud/application.yml --namespace=prod"
-            }
-        }
-
 
         stage('Downstream builds') {
             steps {
