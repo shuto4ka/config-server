@@ -29,6 +29,7 @@ RUN echo "Adding app user and group" \
 ARG app_vers
 
 COPY --chown=1000:0 config-server-${app_vers}.jar /app/config-server.jar
+COPY --chown=1000:0 application.yml /app/application.yml
 
 USER config-server
 WORKDIR /app
