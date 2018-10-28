@@ -8,3 +8,5 @@ spring:
         git:
           uri: https://github.com/shuto4ka/k8s-deployment.git
           search-paths: configs/link-aggregator
+
+management.endpoints.web.exposure.include: ["health", "info"]

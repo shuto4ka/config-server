@@ -6,5 +6,9 @@ spring:
     config:
       server:
         git:
-          uri: /home/aleksandr/projects/configs/link-aggregator
-          search-paths: subdir
+          uri: https://github.com/shuto4ka/k8s-deployment.git
+          search-paths: configs/link-aggregator
+#          uri: /home/aleksandr/projects/configs/link-aggregator
+#          search-paths: subdir
+
+management.endpoints.web.exposure.include: ["health", "info"]
