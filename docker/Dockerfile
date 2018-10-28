@@ -21,4 +21,4 @@ COPY --chown=1000:0 application.yml /app/application.yml
 USER config-server
 WORKDIR /app
 
-CMD /opt/java/bin/java $JMX_OPTS $JAVA_OPTS -jar /app/config-server.jar --spring.config.location=file:/app/application.yml
+CMD java $JMX_OPTS $JAVA_OPTS -jar /app/config-server.jar --spring.config.location=file:/app/application.yml
