@@ -8,8 +8,8 @@ RUN rm /etc/localtime && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
 
 RUN echo "Adding app user and group" \
-    && addgroup -S --gid 1000 application \
-    && adduser -S -G application -u 1000 -s /bin/bash -h /app config-server \
+    && addgroup --system --gid 1000 application \
+    && adduser --system --ingroup application -u 1000 --shell /bin/bash --home /app config-server \
 #    && mkdir /app \
     && chown config-server /app
 
